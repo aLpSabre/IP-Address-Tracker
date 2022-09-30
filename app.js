@@ -32,8 +32,7 @@ const buttonRemove =
 // remove marker
 function removeMarker() {
   const marker = this;
-  console.log(marker.getLatLng().lat);
-  console.log(marker.getLatLng().lng);
+
   let lat = marker.getLatLng().lat;
   let lng = marker.getLatLng().lng;
   ips.forEach(element => {
@@ -74,11 +73,11 @@ function removeMarker() {
             ip = element.id;
           }
         })
-        console.log(ip);
+     
         searchedIps.splice(searchedIps.indexOf(ip), 1);
         localStorage.setItem("searchedIps", JSON.stringify(searchedIps));
         ips = ips.filter(element => element.lat != lat || element.lng != lng);
-        console.log(ips);
+      
 
         localStorage.setItem("IPS", JSON.stringify(ips));
 
@@ -144,7 +143,7 @@ submit.addEventListener("click", () => {
 const getIP = async function (ip) {
   try {
     const res = await fetch(`https://ipapi.co/${ip}/json/`);
-    console.log(res);
+  
     if (res.error) {
       renderError();
       throw new Error(`${res.status}`);
@@ -167,7 +166,7 @@ function renderError() {
   })
 }
 function renderData(data) {
-  console.log(data);
+
   const { ip, latitude, longitude, utc_offset, country, region, city, org } = data;
   if (data.error) {
     renderError();
@@ -198,19 +197,19 @@ function renderData(data) {
 
 
 
-  console.log(ips)
+ 
   ipElement.innerText = ip;
   locationElement.innerText = country + " ," + region + ", " + city;
   timezoneElement.innerText = "UTC" + " " + utc_offset.slice(0, 3) + ":" + utc_offset.slice(3, utc_offset.length);
   ispElement.innerText = org || "-";
-  console.log(org);
 
-  console.log("search", searchedIps);
+
+
   let marker;
   if (searchedIps.indexOf(ip) == -1) {
     searchedIps.push(ip);
     localStorage.setItem("searchedIps", JSON.stringify(searchedIps))
-    console.log(searchedIps);
+ 
     let newIP = {}
     newIP.id = ip
     newIP.lat = latitude
@@ -219,11 +218,10 @@ function renderData(data) {
     newIP.myTimeZone = "UTC" + " " + utc_offset.slice(0, 3) + ":" + utc_offset.slice(3, utc_offset.length)
     newIP.myIsp = org || "-"
 
-    console.log(newIP)
+  
     ips.push(newIP)
     localStorage.setItem("IPS", JSON.stringify(ips))
-    console.log(ips);
-    console.log("if");
+   
     marker = new L.marker([latitude, longitude], {
       draggable: false
     })
