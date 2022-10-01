@@ -269,6 +269,7 @@ window.addEventListener("load", () => {
       confirmButtonAriaLabel: 'Great!,Thumbs up',
 
     }).then((result) => {
+        //*---To show the trace of user's ip--*/
       if (result.isConfirmed) {
         fetch('https://api.ipify.org?format=json')
         .then(function(response) {
@@ -290,6 +291,8 @@ window.addEventListener("load", () => {
       }
     })
   } else {
+    
+    //*---To show the ip of user in input value after first visit--*/
     input.value=JSON.parse(localStorage.getItem("visit")).ip
     return;
   }
