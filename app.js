@@ -42,7 +42,7 @@ function ipLengthCheck(ip){
     /*  p.innerText=element.id.slice(20,element.id.length);
      ipElement.innerText=element.id.slice(0,20); */
    }else{
-     ipElement.style.fontSize="16px";
+     ipElement.style.fontSize="18px";
      ipElement.innerText = ip;
    }
 }
