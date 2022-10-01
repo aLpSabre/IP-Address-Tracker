@@ -9,6 +9,7 @@ const ispElement = document.getElementById("isp");
 
 let ips = JSON.parse(localStorage.getItem("IPS")) || [];
 let searchedIps = JSON.parse(localStorage.getItem("searchedIps")) || [];
+const isNew = localStorage.getItem("visit") == null;
 
 const init = function () {
   ipElement.innerText = "-";
@@ -248,6 +249,24 @@ if(region===city ){
 
 window.addEventListener("load", () => {
   input.focus();
+  if (isNew) {
+    localStorage.setItem("visit", ".");
+    Swal.fire({
+      title: '<strong>Welcome to the <span class="ip-info-title">Ip Tracker</span></strong>',
+      icon: 'info',
+      html:
+        '<ul><li>With the help of Ip tracker, you can track the location,timezone and isp of  any valid ips in the world.</li><li>Any time you searched for an Ip adress,it will be marked on the map,so you can check it later.</li><li>If you want to delete a marker on the map,basically click on the marker and than click the "Delete the marker button" on the pop-up and confirm it,so you are not going to have that marker on your map anymore.</li><li>If you want the see the information of the Ip adress you searched before, click on the marker and it is going to be shown on your webpage.</li></ul>',
+      showCloseButton: true,
+      showCancelButton: false,
+      focusConfirm: false,
+      confirmButtonText:
+        '<i class="fa fa-thumbs-up"></i> Great!',
+      confirmButtonAriaLabel: 'Great!,Thumbs up',
+   
+    })
+  } else {
+    return;
+  }
 })
 
 input.addEventListener("keydown", (e) => {

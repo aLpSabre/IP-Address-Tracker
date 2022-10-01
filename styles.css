@@ -74,6 +74,23 @@ button.remove{
 button.swal2-cancel{
   margin-right: 10px;
 }
+#swal2-html-container ul li{
+  text-align: left;
+  margin-bottom: 5px;
+  list-style: none;
+}
+.ip-info-title{
+  color: #3fc3ee;
+}
+#swal2-html-container ul li::before {
+  content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  color: #3fc3ee;/* Change the color */
+  border-color: #9de0f6;
+  font-weight: bold; /* If you want it to be bold */
+  display: inline-block; /* Needed to add space between the bullet and the text */
+  width: 1em; /* Also needed for space (tweak if needed) */
+  margin-left: -1em; /* Also needed for space (tweak if needed) */
+}
 @media (max-width: 989px) {
   .results div {
     border: none !important;
