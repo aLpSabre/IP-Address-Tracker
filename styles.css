@@ -30,7 +30,7 @@ button {
   font-weight: 700;
   letter-spacing: 0.1rem;
   text-transform: uppercase;
-  width: 75%;
+  width: 80%;
   position: relative;
   transform: translateY(50%);
   z-index: 1;
@@ -74,7 +74,7 @@ button.remove{
 button.swal2-cancel{
   margin-right: 10px;
 }
-@media (max-width: 986px) {
+@media (max-width: 989px) {
   .results div {
     border: none !important;
     padding: 0 !important;
@@ -86,8 +86,10 @@ button.swal2-cancel{
   .results {
     flex-direction: column !important;
     transform: translateY(20%);
+    width: 95%;
   }
 }
+
 @media (max-width: 767px) {
   .results div {
     border: none !important;
@@ -102,6 +104,7 @@ button.swal2-cancel{
   .results {
     flex-direction: column !important;
     transform: translateY(8%);
+  
   }
   .attribution{
     width: 33%;

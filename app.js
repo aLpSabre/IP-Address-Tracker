@@ -199,7 +199,12 @@ function renderData(data) {
 
  
   ipElement.innerText = ip;
-  locationElement.innerText = country + " ," + region + ", " + city;
+if(region===city ){
+  locationElement.innerText = country + ", " + city;
+}else{
+  locationElement.innerText = country +" ,"+region+ ", " + city;
+}
+  
   timezoneElement.innerText = "UTC" + " " + utc_offset.slice(0, 3) + ":" + utc_offset.slice(3, utc_offset.length);
   ispElement.innerText = org || "-";
 
@@ -214,7 +219,12 @@ function renderData(data) {
     newIP.id = ip
     newIP.lat = latitude
     newIP.lng = longitude
-    newIP.myLocation = country + " ," + region + ", " + city;
+    if(region===city ){
+      newIP.myLocation = country +", " + city;
+    }else{
+      newIP.myLocation = country + " ," + region + ", " + city;
+    }
+  
     newIP.myTimeZone = "UTC" + " " + utc_offset.slice(0, 3) + ":" + utc_offset.slice(3, utc_offset.length)
     newIP.myIsp = org || "-"
 
