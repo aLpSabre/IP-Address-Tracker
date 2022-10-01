@@ -6,19 +6,24 @@ const locationElement = document.getElementById("location");
 const timezoneElement = document.getElementById("timezone");
 const ispElement = document.getElementById("isp");
 
-
+//*----To Store the Ips On the LocalStorage----*//
 let ips = JSON.parse(localStorage.getItem("IPS")) || [];
 let searchedIps = JSON.parse(localStorage.getItem("searchedIps")) || [];
-const isNew = localStorage.getItem("visit") == null;
 
+//*----To Detect the new User tho show info----*//
+const isNew = localStorage.getItem("visit") == null;
+//*----To Reset the results----*//
 const init = function () {
   ipElement.innerText = "-";
   locationElement.innerText = "-";
   timezoneElement.innerText = "-";
   ispElement.innerText = "-";
 }
+
+//*----To Create the Map and set the default view----*//
 const accessToken = config.MY_API_TOKEN;
-const map = L.map('map').setView([38.9637, 35.2433], 6);
+const map = L.map('map').setView([38.9637, 35.2433], 2);
+//*----To Get the map from the Jawg api----*//
 L.tileLayer(
   `https://tile.jawg.io/jawg-terrain/{z}/{x}/{y}.png?access-token=${accessToken}`, {
   attribution: '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank" class="jawg-attrib">© <b>Jawg</b>Maps</a> | <a href="https://www.openstreetmap.org/copyright" title="OpenStreetMap is open data licensed under ODbL" target="_blank" class="osm-attrib">© OSM contributors</a>',
@@ -30,12 +35,14 @@ L.tileLayer(
 const buttonRemove =
   '<button type="button" class="remove btn btn-danger mx-auto ">Delete the Marker!</button>';
 
-// remove marker
+//*----To Remove the Marker----*//
 function removeMarker() {
   const marker = this;
-
+  //*----To Get the latitude and longitude of the marker----*//
   let lat = marker.getLatLng().lat;
   let lng = marker.getLatLng().lng;
+
+  //*----To Show the info of the marker on clicked----*//
   ips.forEach(element => {
     if (element.lat == lat && element.lng) {
       ipElement.innerText = element.id;
@@ -45,7 +52,7 @@ function removeMarker() {
     }
   })
 
-
+  //*----To Add the event to remove button and confirm panel----*//
   const btn = document.querySelector(".remove");
   btn.addEventListener("click", function () {
 
@@ -74,12 +81,11 @@ function removeMarker() {
             ip = element.id;
           }
         })
-     
+        //*----To Update the LocalStorage----*//
         searchedIps.splice(searchedIps.indexOf(ip), 1);
         localStorage.setItem("searchedIps", JSON.stringify(searchedIps));
-        ips = ips.filter(element => element.lat != lat || element.lng != lng);
-      
 
+        ips = ips.filter(element => element.lat != lat || element.lng != lng);
         localStorage.setItem("IPS", JSON.stringify(ips));
 
         map.removeLayer(marker);
@@ -89,7 +95,6 @@ function removeMarker() {
         )
 
       } else if (
-        /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel
       ) {
         swalWithBootstrapButtons.fire(
@@ -103,10 +108,9 @@ function removeMarker() {
   });
 }
 
-
+//*----To render the Ips on the LocalStorage---*//
 function renderIps(ips) {
   ips.forEach(element => {
-
 
     const marker = new L.marker([element.lat, element.lng], {
       draggable: false
@@ -114,16 +118,15 @@ function renderIps(ips) {
       .addTo(map)
       .bindPopup(`<p class="ip text-center">The Ip adress is "${element.id}".</p>` + buttonRemove);
 
-    // event remove marker
+    //*----Event remove marker----*//
     marker.on("popupopen", removeMarker);
 
 
 
   });
-}
+} renderIps(ips);
 
-renderIps(ips);
-
+//*----Submit Button----*//
 submit.addEventListener("click", () => {
   if (input.value.length > 0) {
     getIP(input.value);
@@ -139,12 +142,13 @@ submit.addEventListener("click", () => {
   }
 
 })
+ 
 
-
+//*----To get the Ip's from the IpApi----*//
 const getIP = async function (ip) {
   try {
     const res = await fetch(`https://ipapi.co/${ip}/json/`);
-  
+
     if (res.error) {
       renderError();
       throw new Error(`${res.status}`);
@@ -156,7 +160,7 @@ const getIP = async function (ip) {
 
   }
 }
-
+//*----To render Error while fetching----*//
 function renderError() {
 
   Swal.fire({
@@ -166,6 +170,7 @@ function renderError() {
 
   })
 }
+//*----To render and show the data as result----*//
 function renderData(data) {
 
   const { ip, latitude, longitude, utc_offset, country, region, city, org } = data;
@@ -196,16 +201,13 @@ function renderData(data) {
   }
 
 
-
-
- 
   ipElement.innerText = ip;
-if(region===city ){
-  locationElement.innerText = country + ", " + city;
-}else{
-  locationElement.innerText = country +" ,"+region+ ", " + city;
-}
-  
+  if (region === city) {
+    locationElement.innerText = country + ", " + city;
+  } else {
+    locationElement.innerText = country + " ," + region + ", " + city;
+  }
+
   timezoneElement.innerText = "UTC" + " " + utc_offset.slice(0, 3) + ":" + utc_offset.slice(3, utc_offset.length);
   ispElement.innerText = org || "-";
 
@@ -213,26 +215,27 @@ if(region===city ){
 
   let marker;
   if (searchedIps.indexOf(ip) == -1) {
+    //*----To store Ips----*//
     searchedIps.push(ip);
     localStorage.setItem("searchedIps", JSON.stringify(searchedIps))
- 
+
     let newIP = {}
     newIP.id = ip
     newIP.lat = latitude
     newIP.lng = longitude
-    if(region===city ){
-      newIP.myLocation = country +", " + city;
-    }else{
+    if (region === city) {
+      newIP.myLocation = country + ", " + city;
+    } else {
       newIP.myLocation = country + " ," + region + ", " + city;
     }
-  
+
     newIP.myTimeZone = "UTC" + " " + utc_offset.slice(0, 3) + ":" + utc_offset.slice(3, utc_offset.length)
     newIP.myIsp = org || "-"
 
-  
+
     ips.push(newIP)
     localStorage.setItem("IPS", JSON.stringify(ips))
-   
+    //*----To add the Marker----*//
     marker = new L.marker([latitude, longitude], {
       draggable: false
     })
@@ -240,17 +243,19 @@ if(region===city ){
       .bindPopup(`<p class="ip text-center">The Ip adress is "${ip}".</p>` + buttonRemove);
   }
 
-  // set the mapview
+  //*---Set the mapview---*/
   map.setView([latitude, longitude], 12)
 
-  // event remove marker
+  //*---Event remove marker--*/
   marker.on("popupopen", removeMarker);
 }
-
+//*---To show info the the first-visiter and focus on input--*/
 window.addEventListener("load", () => {
+  
   input.focus();
   if (isNew) {
-    localStorage.setItem("visit", ".");
+    let isVisited;
+    
     Swal.fire({
       title: '<strong>Welcome to the <span class="ip-info-title">Ip Tracker</span></strong>',
       icon: 'info',
@@ -262,13 +267,34 @@ window.addEventListener("load", () => {
       confirmButtonText:
         '<i class="fa fa-thumbs-up"></i> Great!',
       confirmButtonAriaLabel: 'Great!,Thumbs up',
-   
+
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch('https://api.ipify.org?format=json')
+        .then(function(response) {
+          response.json().then(jsonData => {
+           
+            getIP(jsonData.ip);
+            isVisited={viseted:true,ip:jsonData.ip}
+            localStorage.setItem("visit", JSON.stringify(isVisited)); 
+          });
+        })
+        .catch(function(error) {
+          console.log(error)
+        });
+
+        Swal.fire(
+          'Here is your Ip adress\'s track',
+         
+        )
+      }
     })
   } else {
+    input.value=JSON.parse(localStorage.getItem("visit")).ip
     return;
   }
 })
-
+//*---Get input with the enter keys--*/
 input.addEventListener("keydown", (e) => {
 
   if (e.code == "Enter" || e.code == "NumpadEnter") {

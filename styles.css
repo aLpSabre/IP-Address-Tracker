@@ -58,38 +58,39 @@ button {
   text-decoration: none;
   color: #0078a8;
 }
-button.remove{
+button.remove {
   border-radius: 10px !important;
   width: 150px !important;
   font-size: 15px !important;
   height: 40px !important;
 }
-.ip{
+.ip {
   font-weight: 600;
 }
-.swal2-confirm ,button.swal2-cancel{
+.swal2-confirm,
+button.swal2-cancel {
   border-radius: 15px !important;
   width: 130px !important;
 }
-button.swal2-cancel{
+button.swal2-cancel {
   margin-right: 10px;
 }
-#swal2-html-container ul li{
+#swal2-html-container ul li {
   text-align: left;
   margin-bottom: 5px;
   list-style: none;
 }
-.ip-info-title{
+.ip-info-title {
   color: #3fc3ee;
 }
 #swal2-html-container ul li::before {
-  content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
-  color: #3fc3ee;/* Change the color */
+  content: "\2022";
+  color: #3fc3ee;
   border-color: #9de0f6;
-  font-weight: bold; /* If you want it to be bold */
-  display: inline-block; /* Needed to add space between the bullet and the text */
-  width: 1em; /* Also needed for space (tweak if needed) */
-  margin-left: -1em; /* Also needed for space (tweak if needed) */
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
 }
 @media (max-width: 989px) {
   .results div {
@@ -121,12 +122,9 @@ button.swal2-cancel{
   .results {
     flex-direction: column !important;
     transform: translateY(8%);
-  
   }
-  .attribution{
+  .attribution {
     width: 33%;
     text-align: center;
-    
   }
 }
-
