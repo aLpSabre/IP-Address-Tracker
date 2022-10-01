@@ -92,6 +92,13 @@ button.swal2-cancel {
   width: 1em;
   margin-left: -1em;
 }
+.leaflet-popup-content {
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 @media (max-width: 989px) {
   .results div {
     border: none !important;

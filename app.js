@@ -2,6 +2,7 @@ const header = document.querySelector(".header");
 const submit = document.getElementById("submit");
 const input = document.getElementById("input");
 const ipElement = document.getElementById("ip");
+const ipDiv=document.querySelector(".ip")
 const locationElement = document.getElementById("location");
 const timezoneElement = document.getElementById("timezone");
 const ispElement = document.getElementById("isp");
@@ -31,6 +32,20 @@ L.tileLayer(
   maxZoom: 20
 }
 ).addTo(map);
+//*----To Check the Ip length to manipulate result----*//
+function ipLengthCheck(ip){
+  if(ip.length>18){
+    /*  let p=document.createElement("p");
+     ipDiv.appendChild(p); */
+     ipElement.style.fontSize="12px";
+     ipElement.innerHTML=`<p>${ip.slice(0,20)}<br>${ip.slice(20,ip.length)}</p>`
+    /*  p.innerText=element.id.slice(20,element.id.length);
+     ipElement.innerText=element.id.slice(0,20); */
+   }else{
+     ipElement.style.fontSize="16px";
+     ipElement.innerText = ip;
+   }
+}
 
 const buttonRemove =
   '<button type="button" class="remove btn btn-danger mx-auto ">Delete the Marker!</button>';
@@ -41,11 +56,11 @@ function removeMarker() {
   //*----To Get the latitude and longitude of the marker----*//
   let lat = marker.getLatLng().lat;
   let lng = marker.getLatLng().lng;
-
+  input.value="";
   //*----To Show the info of the marker on clicked----*//
   ips.forEach(element => {
     if (element.lat == lat && element.lng) {
-      ipElement.innerText = element.id;
+      ipLengthCheck(element.id)
       locationElement.innerText = element.myLocation;
       timezoneElement.innerText = element.myTimeZone;
       ispElement.innerText = element.myIsp;
@@ -129,7 +144,7 @@ function renderIps(ips) {
 //*----Submit Button----*//
 submit.addEventListener("click", () => {
   if (input.value.length > 0) {
-    getIP(input.value);
+    getIP(input.value.trim());
     input.value = "";
 
   } else {
@@ -178,7 +193,8 @@ function renderData(data) {
     renderError();
     return;
   } else if (latitude === null || longitude === null) {
-    ipElement.innerText = ip;
+    
+    ipLengthCheck(ip);
     locationElement.innerText = country + " ," + region + ", " + city;
     timezoneElement.innerText = "UTC" + " " + utc_offset.slice(0, 3) + ":" + utc_offset.slice(3, utc_offset.length);
     ispElement.innerText = org || "-";
@@ -200,8 +216,8 @@ function renderData(data) {
     return;
   }
 
+  ipLengthCheck(ip);
 
-  ipElement.innerText = ip;
   if (region === city) {
     locationElement.innerText = country + ", " + city;
   } else {
@@ -260,7 +276,7 @@ window.addEventListener("load", () => {
       title: '<strong>Welcome to the <span class="ip-info-title">Ip Tracker</span></strong>',
       icon: 'info',
       html:
-        '<ul><li>With the help of Ip tracker, you can track the location,timezone and isp of  any valid ips in the world.</li><li>Any time you searched for an Ip adress,it will be marked on the map,so you can check it later.</li><li>If you want to delete a marker on the map,basically click on the marker and than click the "Delete the marker button" on the pop-up and confirm it,so you are not going to have that marker on your map anymore.</li><li>If you want the see the information of the Ip adress you searched before, click on the marker and it is going to be shown on your webpage.</li></ul>',
+        '<ul><li>With the help of an Ip tracker, you can track the location, timezone, and isp of any valid IP in both formats IPv4 and IPv6.</li><li>Any time you searched for an Ip adress,it will be marked on the map,so you can check it later.</li><li>If you want to delete a marker on the map,basically click on the marker and than click the "Delete the marker button" on the pop-up and confirm it,so you are not going to have that marker on your map anymore.</li><li>If you want the see the information of the Ip adress you searched before, click on the marker and it is going to be shown on your webpage.</li></ul>',
       showCloseButton: true,
       showCancelButton: false,
       focusConfirm: false,
