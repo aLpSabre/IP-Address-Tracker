@@ -284,7 +284,7 @@ window.addEventListener("load", () => {
         });
 
         Swal.fire(
-          'Here is your Ip adress\'s track',
+          'Here is the trace of your Ip address!'
          
         )
       }
