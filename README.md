@@ -23,8 +23,8 @@ Users should be able to:
 
 - View the optimal layout for each page depending on their device's screen size
 - See their own IP address on the map on the initial page load
-- Search for any IP addresses or domains in n both formats IPv4 and IPv6 and see the key          - information and location
-- See the instructions to use the application in their first visit
+- Search for any IP addresses or domains in n both formats IPv4 and IPv6 and see the key-information and location
+- See the instructions to use the application at their first visit
 - See the ip adresses that they searched for before in the ip tracker
 - See the information about the marker, when they clicked on it
 - Delete the markers 
