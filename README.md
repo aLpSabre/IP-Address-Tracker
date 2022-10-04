@@ -41,8 +41,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [click](https://github.com/aLpSabre/IP-Adress-Tracker)
-- Live Site URL: [click](https://ip-trackerr.netlify.app/)
+- Solution URL: [click here.](https://github.com/aLpSabre/IP-Adress-Tracker)
+- Live Site URL: [click here.](https://ip-trackerr.netlify.app/)
 
 ### Built with
 
