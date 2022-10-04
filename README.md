@@ -22,7 +22,6 @@ This is a solution to the [IP address tracker challenge on Frontend Mentor](http
 Users should be able to:
 
 - View the optimal layout for each page depending on their device's screen size
-- See hover states for all interactive elements on the page
 - See their own IP address on the map on the initial page load
 - Search for any IP addresses or domains in n both formats IPv4 and IPv6 and see the key          - information and location
 - See the instructions to use the application in their first visit
