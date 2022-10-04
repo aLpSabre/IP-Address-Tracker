@@ -33,6 +33,8 @@ Users should be able to:
 -💻 Desktop-View
 ![](./gifs/desktop-gif.gif)
 
+![](./gifs/desktop-gif-2.gif)
+
 -📱 Mobile-View
 ![](./gifs/mobile-view.gif)
 
