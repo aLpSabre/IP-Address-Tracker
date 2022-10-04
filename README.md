@@ -78,7 +78,7 @@ const getIP = async function (ip) {
 - [IAPI](https://ipapi.co/) -I used this API to get the informations about IP's.
 - [Ipify](https://www.ipify.org/) -I used this API to get the informations about IP's.
 - [JAWG](https://www.jawg.io/docs/) -I used the tile for the map with Leaflet.
-- [Leaflet Providers](https://github.com/leaflet-extras/leaflet-providers) -An extension to Leaflet that contains configurations for various free1 tile providers.
+- [Leaflet Providers](https://github.com/leaflet-extras/leaflet-providers) -An extension to Leaflet that contains configurations for various free tile providers.
 
 ## Author
 
