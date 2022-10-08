@@ -51,6 +51,7 @@ Users should be able to:
 - Bootstrap
 - Flexbox
 - Mobile-first workflow
+- JavaScript-DOM 
 
 ### What I learned
 
