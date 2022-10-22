@@ -28,7 +28,7 @@ Users should be able to:
 -I also added this functionalies: 
 
 Users should be able to:
-- Search for any IP addresses or domains in n both formats IPv4 and IPv6 
+- Search for any IP addresses or domains in both formats IPv4 and IPv6 
 - See the instructions to use the application at their first visit
 - See the ip adresses that they searched for before in the ip tracker
 - See the information about the marker, when they clicked on it
