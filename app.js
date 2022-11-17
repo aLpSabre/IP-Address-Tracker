@@ -35,12 +35,10 @@ L.tileLayer(
 //*----To Check the Ip length to manipulate result----*//
 function ipLengthCheck(ip){
   if(ip.length>18){
-    /*  let p=document.createElement("p");
-     ipDiv.appendChild(p); */
+
      ipElement.style.fontSize="12px";
      ipElement.innerHTML=`<p>${ip.slice(0,20)}<br>${ip.slice(20,ip.length)}</p>`
-    /*  p.innerText=element.id.slice(20,element.id.length);
-     ipElement.innerText=element.id.slice(0,20); */
+  
    }else{
      ipElement.style.fontSize="18px";
      ipElement.innerText = ip;
